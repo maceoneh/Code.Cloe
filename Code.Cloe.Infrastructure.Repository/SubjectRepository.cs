@@ -67,7 +67,11 @@ namespace Code.Cloe.Infrastructure.Repository
             if (to_modify != null)
             {
                 to_modify.Name = item.Name;
-                this.db.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                to_modify.Address = item.Address;
+                to_modify.Province = item.Province;
+                to_modify.Location = item.Location;
+                to_modify.PostalCode = item.PostalCode;
+                this.db.Subjects.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
             return to_modify;
         }

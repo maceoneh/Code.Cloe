@@ -29,8 +29,8 @@ namespace Code.Cloe.Infrastructure.Factories.Services
             var entityType = typeof(TEntity);
             if (entityType == typeof(Subject))
             {
-                var subject_repository = new SubjectRepository(repository);
-                return (IServiceBase<TEntity, Guid>)new SubjectService(subject_repository);
+                var subjectRepository = new SubjectRepository(repository);
+                return (IServiceBase<TEntity, Guid>)new SubjectService(subjectRepository);
             }
             throw new ArgumentException();
         }

@@ -27,5 +27,11 @@ namespace Code.Cloe.Domain.Models
         /// Nombre del contacto asociado al telefono
         /// </summary>
         public string? NameContact { get; set; }
+
+        public override string ToString()
+        {
+            var txt = "Nombre contacto: " + this.NameContact + " Teléfono: " + this.PhoneNumber;
+            return txt;
+        }
     }
 }

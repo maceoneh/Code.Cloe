@@ -15,6 +15,27 @@ Subject ReadSubject()
     subject.PostalCode = Console.ReadLine();
     Console.WriteLine("Población: ");
     subject.Location = Console.ReadLine();
+    //Se cargan los telefonos
+    subject.Phones = new List<Phone>();
+    var exit = false;
+    do
+    {
+        Console.WriteLine("¿Desea agregar un teléfono de contacto?[S/N]");
+        if (Console.ReadLine() == "S")
+        {
+            var phone = new Phone();
+            Console.WriteLine("Contacto: ");
+            phone.NameContact = Console.ReadLine();
+            Console.WriteLine("Numero: ");
+            phone.PhoneNumber = Console.ReadLine();
+            subject.Phones.Add(phone);
+        }
+        else
+        {
+            exit = true;
+        }
+    }
+    while (!exit);
     return subject;
 }
 //-----

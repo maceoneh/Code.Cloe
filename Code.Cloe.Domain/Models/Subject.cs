@@ -48,8 +48,15 @@ namespace Code.Cloe.Domain.Models
 
         public override string ToString()
         {
-            var text = "Nombre: " + this.Name + " Dirección: " + this.Address;
-            return text;
+            var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode;
+            if (this.Phones != null)
+            {
+                foreach (var phone in this.Phones)
+                { 
+                    text += phone.ToString() + " ";
+                }
+            }
+            return text.TrimEnd();
         }
     }
 }

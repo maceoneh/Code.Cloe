@@ -6,21 +6,22 @@ namespace Code.Cloe.Application.Services
 {
     public class SubjectService : IServiceBase<Subject, Guid>
     {
-        private readonly IRepositoryBase<Subject, Guid> SubjectRepository;
+        private readonly IRepositoryBase<Subject, Guid> SubjectRepository;        
 
-        public SubjectService(IRepositoryBase<Subject, Guid> Reposotory)
+        public SubjectService(IRepositoryBase<Subject, Guid> subjectRepository)
         { 
-            this.SubjectRepository = Reposotory;
+            this.SubjectRepository = subjectRepository;
         }
 
         public Subject Add(Subject item)
         {
             if (item == null)
             {
-                throw new ArgumentNullException("DTOSubject object is required");
+                throw new ArgumentNullException("Subject object is required");
             }
             //-----
-            var result = this.SubjectRepository.Add(item);
+            var result = this.SubjectRepository.Add(item);            
+            //-----
             this.SubjectRepository.Commit();
             //-----
             return result;
@@ -30,10 +31,11 @@ namespace Code.Cloe.Application.Services
         {
             if (item == null)
             {
-                throw new ArgumentNullException("DTOSubject object is required");
+                throw new ArgumentNullException("Subject object is required");
             }
             //-----
             var result = await this.SubjectRepository.AddAsync(item);
+            //-----
             await this.SubjectRepository.CommitAsync();
             //-----
             return result;
@@ -53,7 +55,7 @@ namespace Code.Cloe.Application.Services
         {
             if (item == null)
             {
-                throw new ArgumentNullException("DTOSubject object is required");
+                throw new ArgumentNullException("Subject object is required");
             }
             //-----
             var result = this.SubjectRepository.Edit(item);
@@ -65,7 +67,7 @@ namespace Code.Cloe.Application.Services
         {
             if (item == null)
             {
-                throw new ArgumentNullException("DTOSubject object is required");
+                throw new ArgumentNullException("Subject object is required");
             }
             //-----
             var result = await this.SubjectRepository.EditAsync(item);

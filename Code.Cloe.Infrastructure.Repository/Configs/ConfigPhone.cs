@@ -15,7 +15,10 @@ namespace Code.Cloe.Infrastructure.Repository.Configs
         {
             builder.ToTable("phones");
             builder.HasKey(p => p.ID);
-            builder.HasOne<Subject>().WithMany(p => p.Phones).HasForeignKey(s => s.SubjectID);
+            builder.HasOne<Subject>()
+                .WithMany(p => p.Phones)
+                .HasForeignKey(s => s.SubjectID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
