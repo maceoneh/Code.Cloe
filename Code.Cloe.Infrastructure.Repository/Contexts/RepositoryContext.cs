@@ -8,6 +8,7 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
     {
         internal string Folder { get; private set; }
         internal DbSet<Subject> Subjects { get; set; }
+        internal DbSet<Phone> Phones { get; set; }
 
         public RepositoryContext()
         {
@@ -36,6 +37,7 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ConfigSubject());
+            modelBuilder.ApplyConfiguration(new ConfigPhone());
         }
 
         public void Migrate()

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Code.Cloe.Infrastructure.Repository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240510083600_Initial")]
+    [Migration("20240511154331_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,6 +19,28 @@ namespace Code.Cloe.Infrastructure.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+
+            modelBuilder.Entity("Code.Cloe.Domain.Models.Phone", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameContact")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SubjectID")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SubjectID");
+
+                    b.ToTable("phones", (string)null);
+                });
 
             modelBuilder.Entity("Code.Cloe.Domain.Models.Subject", b =>
                 {
@@ -39,9 +61,26 @@ namespace Code.Cloe.Infrastructure.Repository.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Province")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("ID");
 
                     b.ToTable("subjects", (string)null);
+                });
+
+            modelBuilder.Entity("Code.Cloe.Domain.Models.Phone", b =>
+                {
+                    b.HasOne("Code.Cloe.Domain.Models.Subject", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("SubjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Code.Cloe.Domain.Models.Subject", b =>
+                {
+                    b.Navigation("Phones");
                 });
 #pragma warning restore 612, 618
         }

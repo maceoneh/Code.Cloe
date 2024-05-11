@@ -76,7 +76,7 @@ if (!Directory.Exists(localDataFolder))
 //----- Se guarda la ruta por si las clases Factory las necesitan para instanciar
 Code.Cloe.Infrastructure.Factories.Services.Create.RepositoryFolder = localDataFolder;
 //-----
-var sc = new RepositoryContext();
+var sc = new RepositoryContext(localDataFolder);
 sc.Migrate();
 //-----
 var opt = -1;

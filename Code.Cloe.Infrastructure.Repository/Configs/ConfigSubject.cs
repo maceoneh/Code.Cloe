@@ -9,7 +9,7 @@ namespace Code.Cloe.Infrastructure.Repository.Configs
         public void Configure(EntityTypeBuilder<Subject> builder)
         {
             builder.ToTable("subjects");
-            builder.HasKey(s => s.ID);            
+            builder.HasKey(s => s.ID);
         }
     }
 }
