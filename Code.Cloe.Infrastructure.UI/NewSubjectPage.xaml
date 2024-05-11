@@ -4,42 +4,42 @@
              x:Class="Code.Cloe.Infrastructure.UI.NewSubjectPage"
              Title="Nuevo cliente">
     <ScrollView>
-    <VerticalStackLayout>
-        <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Text="Nombre: "></Label>
-            <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eName"/>
-        </Grid>
-        <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Text="Dirección: "></Label>
-            <Editor Grid.Column="1" Placeholder="Escriba aquí su dirección..." x:Name="eAddress"/>
-        </Grid>
-        <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Text="Código postal: "></Label>
-            <Editor Grid.Column="1" Placeholder="Escriba aquí su código postal..." x:Name="ePC"/>
-        </Grid>
-        <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Text="Población: "></Label>
-            <Editor Grid.Column="1" Placeholder="Escriba aquí su población..." x:Name="eLocation"/>
-        </Grid>
+        <VerticalStackLayout>
+            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
+                <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eName"/>
+            </Grid>
+            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Dirección: " Style="{StaticResource LabelH1}"></Label>
+                <Editor Grid.Column="1" Placeholder="Escriba aquí su dirección..." x:Name="eAddress"/>
+            </Grid>
+            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="C.P.: " Style="{StaticResource LabelH1}"></Label>
+                <Editor Grid.Column="1" Placeholder="Escriba aquí su código postal..." x:Name="ePC"/>
+            </Grid>
+            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Población: " Style="{StaticResource LabelH1}"></Label>
+                <Editor Grid.Column="1" Placeholder="Escriba aquí su población..." x:Name="eLocation"/>
+            </Grid>
             <HorizontalStackLayout HorizontalOptions="Center">
-                <Button x:Name="btCancel" Text="Cancelar" HorizontalOptions="Center" WidthRequest="100"></Button>
-                <Button x:Name="btSave" Text="Guardar" HorizontalOptions="Center" WidthRequest="100"></Button>
+                <Button x:Name="btCancel" Text="Cancelar" HorizontalOptions="Center" Style="{StaticResource buttonStyle}"></Button>
+                <Button x:Name="btSave" Text="Guardar" HorizontalOptions="Center"></Button>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

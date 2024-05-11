@@ -17,7 +17,7 @@ Subject ReadSubject()
     subject.Location = Console.ReadLine();
     return subject;
 }
-
+//-----
 int Menu()
 {
     Console.WriteLine("MENU");
@@ -46,14 +46,14 @@ int Menu()
         return -1;
     }
 }
-
+//-----
 async Task CreateSubject()
 {
     var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
     //-----
     var entry = await ss.AddAsync(ReadSubject());
 }
-
+//-----
 async Task ListSubjects()
 {
     var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
