@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Code.Cloe.Application.Services;
 using Code.Cloe.Domain.Models;
+using Code.Cloe.Infrastructure.Factories.Services;
 using Code.Cloe.Infrastructure.Proxies;
 using Code.Cloe.Infrastructure.Repository;
 using Code.Cloe.Infrastructure.Repository.Contexts;
@@ -125,8 +126,9 @@ int Menu()
     Console.WriteLine("MENU");
     Console.WriteLine("****************");
     Console.WriteLine("1. Crear sujeto");
-    Console.WriteLine("2. Lista sujetos");
-    Console.WriteLine("3. Modifica sujetos");
+    Console.WriteLine("2. Modifica sujetos");
+    Console.WriteLine("3. Eliminar sujeto");
+    Console.WriteLine("4. Lista sujetos");
     Console.WriteLine("");
     Console.WriteLine("0. Salir");
     Console.WriteLine("");
@@ -186,12 +188,27 @@ async Task<List<SubjectProxy>> ListSubjects()
         proxylist.Add(new SubjectProxy(item));
     }
     //-----
+    var rowCount = 0;
     foreach (var item in proxylist)
     {
-        Console.WriteLine(item);
+        rowCount++;
+        Console.WriteLine(rowCount.ToString() + " - " + item);
     }
     //-----
     return proxylist;
+}
+//-----
+async Task DeleteSubjects()
+{
+    var list = await ListSubjects();
+    Console.Write("Indique la fila del registro a eliminar: ");
+    var row = Console.ReadLine();
+    if (!string.IsNullOrWhiteSpace(row))
+    { 
+        var entry = list[int.Parse(row)];
+        var subjectService = Create.ServiceBase<Subject>();
+        await subjectService.DeleteAsync(entry.ID);
+    }
 }
 //----- Se obtiene la ruta donde guardar los datos de la aplicación
 var localDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -215,10 +232,12 @@ do
     {
         case 1:
             await CreateSubject(); break;
-        case 2:
+        case 4:
             await ListSubjects(); break;
-        case 3:
+        case 2:
             await EditSubjects(); break;
+        case 3:
+            await DeleteSubjects(); break;
     }
 }
 while (opt != 0);
