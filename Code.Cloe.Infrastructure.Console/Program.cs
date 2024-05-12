@@ -9,26 +9,26 @@ using System.Runtime.CompilerServices;
 Subject ReadSubject()
 {
     var subject = new Subject();
-    Console.WriteLine("Nombre: ");
+    Console.Write("Nombre: ");
     subject.Name = Console.ReadLine();
-    Console.WriteLine("Dirección: ");
+    Console.Write("Dirección: ");
     subject.Address = Console.ReadLine();
-    Console.WriteLine("Código postal: ");
+    Console.Write("Código postal: ");
     subject.PostalCode = Console.ReadLine();
-    Console.WriteLine("Población: ");
+    Console.Write("Población: ");
     subject.Location = Console.ReadLine();
     //Se cargan los telefonos
     subject.Phones = new List<Phone>();
     var exit = false;
     do
     {
-        Console.WriteLine("¿Desea agregar un teléfono de contacto?[S/N]");
+        Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
             var phone = new Phone();
-            Console.WriteLine("Contacto: ");
+            Console.Write("Contacto: ");
             phone.NameContact = Console.ReadLine();
-            Console.WriteLine("Numero: ");
+            Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
             subject.Phones.Add(phone);
         }
@@ -46,16 +46,16 @@ Subject? EditSubject(SubjectProxy entry)
     Console.WriteLine("Se va a modificar el siguiente registro (INTRO mantiene la información):");
     Console.WriteLine(entry.ToString());
     var subject = entry.Model;
-    Console.WriteLine("Nombre: ");
+    Console.Write("Nombre: ");
     var inputText = Console.ReadLine();
     subject.Name = string.IsNullOrWhiteSpace(inputText) ? subject.Name : inputText;
-    Console.WriteLine("Dirección: ");
+    Console.Write("Dirección: ");
     inputText = Console.ReadLine();
     subject.Address = string.IsNullOrWhiteSpace(inputText) ? subject.Address : inputText;
-    Console.WriteLine("Código postal: ");
+    Console.Write("Código postal: ");
     inputText = Console.ReadLine();
     subject.PostalCode = string.IsNullOrWhiteSpace(inputText) ? subject.PostalCode : inputText; ;
-    Console.WriteLine("Población: ");
+    Console.Write("Población: ");
     inputText = Console.ReadLine();
     subject.Location = string.IsNullOrWhiteSpace(inputText) ? subject.Location : inputText;
     //Se cargan los telefonos
@@ -63,20 +63,46 @@ Subject? EditSubject(SubjectProxy entry)
     do
     {
         if (subject.Phones == null)
-        { 
+        {
             subject.Phones = new List<Phone>();
         }
-        Console.WriteLine("¿Desea agregar un teléfono de contacto?[S/N]");
+        //-----
+        Console.WriteLine("Vias de contacto: ");
+        foreach (var item in subject.Phones)
+        {
+            Console.WriteLine(item);
+        }
+        //-----
+        Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
             var phone = new Phone();
-            Console.WriteLine("Contacto: ");
+            Console.Write("Contacto: ");
             phone.NameContact = Console.ReadLine();
-            Console.WriteLine("Numero: ");
+            Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
             subject.Phones.Add(phone);
         }
-        else
+        //-----
+        Console.Write("¿Desea modificar un teléfono de contacto?[S/N] ");
+        if (Console.ReadLine() == "S")
+        {
+            Console.Write("Indique el número de fila a modificar: ");
+            var row = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(row))
+            {
+                var contact = subject.Phones[int.Parse(row) - 1];
+                Console.Write("Nombre: ");
+                inputText = Console.ReadLine();
+                contact.NameContact = string.IsNullOrWhiteSpace(inputText)?contact.NameContact : inputText;
+                Console.Write("Teléfono: ");
+                inputText = Console.ReadLine();
+                contact.PhoneNumber = string.IsNullOrWhiteSpace(inputText) ? contact.PhoneNumber : inputText;
+            }
+        }
+        //-----
+        Console.Write("¿Desea seguir modificando las vias de contacto? ");
+        if (Console.ReadLine() != "S")
         {
             exit = true;
         }
@@ -84,7 +110,7 @@ Subject? EditSubject(SubjectProxy entry)
     while (!exit);
     //-----
     Console.WriteLine(subject.ToString());
-    Console.WriteLine("¿Desea guardar la información acutal?[S/N]");
+    Console.Write("¿Desea guardar la información acutal?[S/N] ");
     if (!String.Equals(Console.ReadLine(), "S"))
     {
         subject = null;
@@ -95,6 +121,7 @@ Subject? EditSubject(SubjectProxy entry)
 //-----
 int Menu()
 {
+    Console.WriteLine("****************");
     Console.WriteLine("MENU");
     Console.WriteLine("****************");
     Console.WriteLine("1. Crear sujeto");
@@ -102,6 +129,8 @@ int Menu()
     Console.WriteLine("3. Modifica sujetos");
     Console.WriteLine("");
     Console.WriteLine("0. Salir");
+    Console.WriteLine("");
+    Console.Write("Seleccione una opción: ");
     var option = Console.ReadLine();
     try
     {
@@ -133,7 +162,7 @@ async Task CreateSubject()
 async Task EditSubjects()
 {
     var list = await ListSubjects();
-    Console.WriteLine("Indique la fila del elemento que desea editar: ");
+    Console.Write("Indique la fila del elemento que desea editar: ");
     var fila = Console.ReadLine();
     if (fila != null)
     {
@@ -153,7 +182,7 @@ async Task<List<SubjectProxy>> ListSubjects()
     var list = await ss.ListAsync();
     var proxylist = new List<SubjectProxy>();
     foreach (var item in list)
-    { 
+    {
         proxylist.Add(new SubjectProxy(item));
     }
     //-----
