@@ -1,12 +1,14 @@
 ﻿using Code.Cloe.Domain.Models;
 using Code.Cloe.Infrastructure.Factories.Services;
+using Code.Cloe.Infrastructure.Proxies.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Code.Cloe.Infrastructure.Proxies
 {
-    public class SubjectProxy
+    public class SubjectProxy : IModelProxy<Subject>
     {
-        private Subject Model { get; }
+        public Subject Model { get; }
 
         public SubjectProxy(Subject model)
         {
@@ -43,58 +45,76 @@ namespace Code.Cloe.Infrastructure.Proxies
         /// <summary>
         /// Listado de teléfonos asociados al sujeto
         /// </summary>
-        public Task<List<Phone>?> PhonesAsync 
+        public Task<List<Phone>> PhonesAsync 
         {
             get
             {
-                return Task.Factory.StartNew<List<Phone>?>(() => 
+                return Task.Factory.StartNew<List<Phone>>(() => 
                 {
-                    if (this.Model.Phones == null)
-                    {
-                        this.Model.Phones = new List<Phone>();
-                        //-----
-                        var phoneService = Create.ServiceBase<Phone>();
-                        var phones = phoneService.Where(p => p.SubjectID == this.ID);
-                        foreach (var item in phones)
-                        { 
-                            this.Model.Phones.Add(item);
-                        }
-                    }
-                    return this.Model.Phones;
+                    this.LoadPhones();
+                    return this.Model.Phones == null ? new List<Phone>() : this.Model.Phones;
                 });                
             }
         }
 
-        public List<Phone>? Phones
+        public List<Phone> Phones
         {
             get
             {
-                if (this.Model.Phones == null)
+                this.LoadPhones();
+                return this.Model.Phones == null ? new List<Phone>() : this.Model.Phones;
+            }
+        }
+
+        private void LoadPhones()
+        {
+            if (this.Model.Phones == null)
+            {
+                this.Model.Phones = new List<Phone>();
+                //-----
+                var phoneService = Create.ServiceBase<Phone>();
+                var phones = phoneService.Where(p => p.SubjectID == this.ID);
+                foreach (var item in phones)
                 {
-                    this.Model.Phones = new List<Phone>();
-                    //-----
-                    var phoneService = Create.ServiceBase<Phone>();
-                    var phones = phoneService.Where(p => p.SubjectID == this.ID);
-                    foreach (var item in phones)
-                    {
-                        this.Model.Phones.Add(item);
-                    }
+                    this.Model.Phones.Add(item);
                 }
-                return this.Model.Phones;
+            }
+        }
+
+        private async Task LoadPhonesAsync()
+        {
+            if (this.Model.Phones == null)
+            {
+                this.Model.Phones = new List<Phone>();
+                //-----
+                var phoneService = Create.ServiceBase<Phone>();
+                var phones = await phoneService.Where(p => p.SubjectID == this.ID).ToListAsync();
+                foreach (var item in phones)
+                {
+                    this.Model.Phones.Add(item);
+                }
             }
         }
 
         public override string ToString()
         {
-            var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode + " ";
-            if (this.Phones != null)
-            {
-                foreach (var phone in this.Phones)
-                {
-                    text += phone.ToString() + " ";
-                }
-            }
-            return text.TrimEnd();
+            this.LoadPhones();
+            return this.Model.ToString();
+        }
+
+        public void LoadData()
+        {
+            this.LoadPhones();
+        }
+
+        public async Task LoadDataAsync()
+        {
+            await this.LoadPhonesAsync();
+        }
+
+        public void Initialize()
+        {
+            this.Model.Phones = null;
         }
     }
 }

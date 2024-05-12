@@ -45,11 +45,13 @@ namespace Code.Cloe.Application.Services
         public void Delete(Guid id)
         {
             this.SubjectRepository.Delete(id);
+            this.SubjectRepository.Commit();
         }
 
         public async Task DeleteAsync(Guid id)
         {
             await this.SubjectRepository.DeleteAsync(id);
+            await this.SubjectRepository.CommitAsync();
         }
 
         public Subject? Edit(Subject item)
@@ -60,6 +62,7 @@ namespace Code.Cloe.Application.Services
             }
             //-----
             var result = this.SubjectRepository.Edit(item);
+            this.SubjectRepository.Commit();
             //-----
             return result;
         }
@@ -72,6 +75,7 @@ namespace Code.Cloe.Application.Services
             }
             //-----
             var result = await this.SubjectRepository.EditAsync(item);
+            await this.SubjectRepository.CommitAsync();
             //-----
             return result;
         }
