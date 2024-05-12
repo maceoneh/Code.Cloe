@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Code.Cloe.Application.Services;
 using Code.Cloe.Domain.Models;
+using Code.Cloe.Infrastructure.Proxies;
 using Code.Cloe.Infrastructure.Repository;
 using Code.Cloe.Infrastructure.Repository.Contexts;
 
@@ -80,8 +81,13 @@ async Task ListSubjects()
     var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
     //-----
     var list = await ss.ListAsync();
-    //-----
+    var proxylist = new List<SubjectProxy>();
     foreach (var item in list)
+    { 
+        proxylist.Add(new SubjectProxy(item));
+    }
+    //-----
+    foreach (var item in proxylist)
     {
         Console.WriteLine(item);
     }

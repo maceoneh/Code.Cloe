@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Code.Cloe.Application\Code.Cloe.Application.csproj" />
     <ProjectReference Include="..\Code.Cloe.Domain\Code.Cloe.Domain.csproj" />
     <ProjectReference Include="..\Code.Cloe.Infrastructure.Factories\Code.Cloe.Infrastructure.Factories.csproj" />
+    <ProjectReference Include="..\Code.Cloe.Infrastructure.Proxies\Code.Cloe.Infrastructure.Proxies.csproj" />
     <ProjectReference Include="..\Code.Cloe.Infrastructure.Repository\Code.Cloe.Infrastructure.Repository.csproj" />
   </ItemGroup>
 

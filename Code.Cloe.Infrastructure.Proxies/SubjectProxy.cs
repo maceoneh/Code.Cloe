@@ -43,7 +43,7 @@ namespace Code.Cloe.Infrastructure.Proxies
         /// <summary>
         /// Listado de teléfonos asociados al sujeto
         /// </summary>
-        public Task<List<Phone>?> Phones 
+        public Task<List<Phone>?> PhonesAsync 
         {
             get
             {
@@ -63,6 +63,38 @@ namespace Code.Cloe.Infrastructure.Proxies
                     return this.Model.Phones;
                 });                
             }
+        }
+
+        public List<Phone>? Phones
+        {
+            get
+            {
+                if (this.Model.Phones == null)
+                {
+                    this.Model.Phones = new List<Phone>();
+                    //-----
+                    var phoneService = Create.ServiceBase<Phone>();
+                    var phones = phoneService.Where(p => p.SubjectID == this.ID);
+                    foreach (var item in phones)
+                    {
+                        this.Model.Phones.Add(item);
+                    }
+                }
+                return this.Model.Phones;
+            }
+        }
+
+        public override string ToString()
+        {
+            var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode;
+            if (this.Phones != null)
+            {
+                foreach (var phone in this.Phones)
+                {
+                    text += phone.ToString() + " ";
+                }
+            }
+            return text.TrimEnd();
         }
     }
 }
