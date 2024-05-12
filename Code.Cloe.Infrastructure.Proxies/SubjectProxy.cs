@@ -47,16 +47,21 @@ namespace Code.Cloe.Infrastructure.Proxies
         {
             get
             {
-
-                if (this.Model.Phones == null)
+                return Task.Factory.StartNew<List<Phone>?>(() => 
                 {
-                    this.Model.Phones = new List<Phone>();
-
-                    //-----
-                    var subjectService = Create.ServiceBase<Phone>();
-                }
-                //-----
-                return this.Model.Phones;
+                    if (this.Model.Phones == null)
+                    {
+                        this.Model.Phones = new List<Phone>();
+                        //-----
+                        var phoneService = Create.ServiceBase<Phone>();
+                        var phones = phoneService.Where(p => p.SubjectID == this.ID);
+                        foreach (var item in phones)
+                        { 
+                            this.Model.Phones.Add(item);
+                        }
+                    }
+                    return this.Model.Phones;
+                });                
             }
         }
     }
