@@ -205,7 +205,7 @@ async Task DeleteSubjects()
     var row = Console.ReadLine();
     if (!string.IsNullOrWhiteSpace(row))
     { 
-        var entry = list[int.Parse(row)];
+        var entry = list[int.Parse(row) - 1];
         var subjectService = Create.ServiceBase<Subject>();
         await subjectService.DeleteAsync(entry.ID);
     }

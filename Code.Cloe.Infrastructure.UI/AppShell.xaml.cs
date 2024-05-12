@@ -25,6 +25,7 @@ namespace Code.Cloe.Infrastructure.UI
             //----- Se genera la estructura de la base de datos
             var repository = new RepositoryContext(localDataFolder);
             repository.Migrate();
+            
         }
     }
 }

@@ -24,7 +24,7 @@
 		<ApplicationTitle>Code.Cloe.Infrastructure.UI</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.code.cloe.infrastructure.ui</ApplicationId>
+		<ApplicationId>es.dmoreno.code.cloe.infrastructure.ui</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
