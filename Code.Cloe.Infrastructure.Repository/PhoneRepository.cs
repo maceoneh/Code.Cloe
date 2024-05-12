@@ -3,8 +3,11 @@ using Code.Cloe.Domain.Models;
 using Code.Cloe.Infrastructure.Repository.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,12 +100,17 @@ namespace Code.Cloe.Infrastructure.Repository
 
         public List<Phone> List()
         {
-            return this.db.Phones.ToList();
+            return this.db.Phones.ToList(); 
         }
 
         public async Task<List<Phone>> ListAsync()
         {
             return await this.db.Phones.ToListAsync();
+        }
+
+        public IQueryable<Phone> Where(Expression<Func<Phone, bool>> predicate)
+        {
+            return this.db.Phones.Where(predicate);
         }
     }
 }

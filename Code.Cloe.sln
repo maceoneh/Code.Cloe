@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Code.Cloe.Infrastructure.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Code.Cloe.Infrastructure.UI", "Code.Cloe.Infrastructure.UI\Code.Cloe.Infrastructure.UI.csproj", "{55AD8FE8-8DC9-4032-A6E4-9AE9D0CD0B91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.Cloe.Infrastructure.Factories", "Code.Cloe.Infrastructure.Factories\Code.Cloe.Infrastructure.Factories.csproj", "{C65CEABF-7588-46AC-BE12-7E83B57EFFF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Code.Cloe.Infrastructure.Factories", "Code.Cloe.Infrastructure.Factories\Code.Cloe.Infrastructure.Factories.csproj", "{C65CEABF-7588-46AC-BE12-7E83B57EFFF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.Cloe.Infrastructure.Proxies", "Code.Cloe.Infrastructure.Proxies\Code.Cloe.Infrastructure.Proxies.csproj", "{C0B08C6B-2BDB-4315-A8C5-A3D32A29A2A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{C65CEABF-7588-46AC-BE12-7E83B57EFFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65CEABF-7588-46AC-BE12-7E83B57EFFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C65CEABF-7588-46AC-BE12-7E83B57EFFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B08C6B-2BDB-4315-A8C5-A3D32A29A2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B08C6B-2BDB-4315-A8C5-A3D32A29A2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B08C6B-2BDB-4315-A8C5-A3D32A29A2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B08C6B-2BDB-4315-A8C5-A3D32A29A2A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

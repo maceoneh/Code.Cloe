@@ -1,6 +1,7 @@
 ﻿using Code.Cloe.Application.Interfaces;
 using Code.Cloe.Domain.Interfaces.Repository;
 using Code.Cloe.Domain.Models;
+using System.Linq.Expressions;
 
 namespace Code.Cloe.Application.Services
 {
@@ -97,6 +98,11 @@ namespace Code.Cloe.Application.Services
         public async Task<List<Subject>> ListAsync()
         {
             return await this.SubjectRepository.ListAsync();
+        }
+
+        public IQueryable<Subject> Where(Expression<Func<Subject, bool>> predicate)
+        {
+            return this.SubjectRepository.Where(predicate);
         }
     }
 }

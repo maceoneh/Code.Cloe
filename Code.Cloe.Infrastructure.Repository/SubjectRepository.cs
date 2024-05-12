@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,6 +106,11 @@ namespace Code.Cloe.Infrastructure.Repository
         public async Task<List<Subject>> ListAsync()
         {
             return await this.db.Subjects.ToListAsync();
+        }
+
+        public IQueryable<Subject> Where(Expression<Func<Subject, bool>> predicate)
+        {
+            return this.db.Subjects.Where<Subject>(predicate);
         }
     }
 }

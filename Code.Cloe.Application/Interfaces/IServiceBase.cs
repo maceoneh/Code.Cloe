@@ -7,7 +7,7 @@ using Code.Cloe.Domain.Interfaces;
 
 namespace Code.Cloe.Application.Interfaces
 {
-    public interface IServiceBase<TEntity, TEntityId> : IAdd<TEntity>, IDelete<TEntityId>, IEdit<TEntity>, IList<TEntity, TEntityId>
+    public interface IServiceBase<TEntity, TEntityId> : IAdd<TEntity>, IDelete<TEntityId>, IEdit<TEntity>, IList<TEntity, TEntityId>, IWhere<TEntity>
     {
 
     }

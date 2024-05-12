@@ -32,6 +32,11 @@ namespace Code.Cloe.Infrastructure.Factories.Services
                 var subjectRepository = new SubjectRepository(repository);
                 return (IServiceBase<TEntity, Guid>)new SubjectService(subjectRepository);
             }
+            else if (entityType == typeof(Phone))
+            {
+                var subjectRepository = new PhoneRepository(repository);
+                return (IServiceBase<TEntity, Guid>)new PhoneService(subjectRepository);
+            }
             throw new ArgumentException();
         }
     }
