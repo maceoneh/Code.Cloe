@@ -45,76 +45,76 @@ namespace Code.Cloe.Infrastructure.Proxies
         /// <summary>
         /// Listado de teléfonos asociados al sujeto
         /// </summary>
-        public Task<List<Phone>> PhonesAsync 
+        public Task<List<Contact>> ContactsAsync 
         {
             get
             {
-                return Task.Factory.StartNew<List<Phone>>(() => 
+                return Task.Factory.StartNew<List<Contact>>(() => 
                 {
-                    this.LoadPhones();
-                    return this.Model.Phones == null ? new List<Phone>() : this.Model.Phones;
+                    this.LoadContacts();
+                    return this.Model.Contacts == null ? new List<Contact>() : this.Model.Contacts;
                 });                
             }
         }
 
-        public List<Phone> Phones
+        public List<Contact> Contacts
         {
             get
             {
-                this.LoadPhones();
-                return this.Model.Phones == null ? new List<Phone>() : this.Model.Phones;
+                this.LoadContacts();
+                return this.Model.Contacts == null ? new List<Contact>() : this.Model.Contacts;
             }
         }
 
-        private void LoadPhones()
+        private void LoadContacts()
         {
-            if (this.Model.Phones == null)
+            if (this.Model.Contacts == null)
             {
-                this.Model.Phones = new List<Phone>();
+                this.Model.Contacts = new List<Contact>();
                 //-----
-                var phoneService = Create.ServiceBase<Phone>();
+                var phoneService = Create.ServiceBase<Contact>();
                 var phones = phoneService.Where(p => p.SubjectID == this.ID);
                 foreach (var item in phones)
                 {
-                    this.Model.Phones.Add(item);
+                    this.Model.Contacts.Add(item);
                 }
             }
         }
 
-        private async Task LoadPhonesAsync()
+        private async Task LoadContactsAsync()
         {
-            if (this.Model.Phones == null)
+            if (this.Model.Contacts == null)
             {
-                this.Model.Phones = new List<Phone>();
+                this.Model.Contacts = new List<Contact>();
                 //-----
-                var phoneService = Create.ServiceBase<Phone>();
+                var phoneService = Create.ServiceBase<Contact>();
                 var phones = await phoneService.Where(p => p.SubjectID == this.ID).ToListAsync();
                 foreach (var item in phones)
                 {
-                    this.Model.Phones.Add(item);
+                    this.Model.Contacts.Add(item);
                 }
             }
         }
 
         public override string ToString()
         {
-            this.LoadPhones();
+            this.LoadContacts();
             return this.Model.ToString();
         }
 
         public void LoadData()
         {
-            this.LoadPhones();
+            this.LoadContacts();
         }
 
         public async Task LoadDataAsync()
         {
-            await this.LoadPhonesAsync();
+            await this.LoadContactsAsync();
         }
 
         public void Initialize()
         {
-            this.Model.Phones = null;
+            this.Model.Contacts = null;
         }
     }
 }

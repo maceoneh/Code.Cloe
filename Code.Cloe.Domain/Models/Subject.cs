@@ -44,14 +44,14 @@ namespace Code.Cloe.Domain.Models
         /// <summary>
         /// Listado de teléfonos asociados al sujeto
         /// </summary>
-        public List<Phone>? Phones { get; set; }
+        public List<Contact>? Contacts { get; set; }
 
         public override string ToString()
         {
             var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode;
-            if (this.Phones != null)
+            if (this.Contacts != null)
             {
-                foreach (var phone in this.Phones)
+                foreach (var phone in this.Contacts)
                 { 
                     text += phone.ToString() + " ";
                 }

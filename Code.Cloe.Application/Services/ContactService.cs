@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Application.Services
 {
-    public class PhoneService : IServiceBase<Phone, Guid>
+    public class ContactService : IServiceBase<Contact, Guid>
     {
-        private readonly IRepositoryBase<Phone, Guid> PhoneRepository;
+        private readonly IRepositoryBase<Contact, Guid> PhoneRepository;
 
-        public PhoneService(IRepositoryBase<Phone, Guid> subjectRepository)
+        public ContactService(IRepositoryBase<Contact, Guid> subjectRepository)
         {
             this.PhoneRepository = subjectRepository;
         }
 
-        public Phone Add(Phone item)
+        public Contact Add(Contact item)
         {
             if (item == null)
             { 
@@ -33,7 +33,7 @@ namespace Code.Cloe.Application.Services
             return item;
         }
 
-        public async Task<Phone> AddAsync(Phone item)
+        public async Task<Contact> AddAsync(Contact item)
         {
             if (item == null)
             {
@@ -57,37 +57,37 @@ namespace Code.Cloe.Application.Services
             await this.PhoneRepository.DeleteAsync(id);
         }
 
-        public Phone? Edit(Phone item)
+        public Contact? Edit(Contact item)
         {
             return this.PhoneRepository.Edit(item);
         }
 
-        public async Task<Phone?> EditAsync(Phone item)
+        public async Task<Contact?> EditAsync(Contact item)
         {
             return await this.PhoneRepository.EditAsync(item);
         }
 
-        public Phone? Get(Guid id)
+        public Contact? Get(Guid id)
         {
             return this.PhoneRepository.Get(id);
         }
 
-        public async Task<Phone?> GetAsync(Guid id)
+        public async Task<Contact?> GetAsync(Guid id)
         {
             return await this.PhoneRepository.GetAsync(id);
         }
 
-        public List<Phone> List()
+        public List<Contact> List()
         {
             return this.PhoneRepository.List();
         }
 
-        public async Task<List<Phone>> ListAsync()
+        public async Task<List<Contact>> ListAsync()
         {
             return await this.PhoneRepository.ListAsync();
         }
 
-        public IQueryable<Phone> Where(Expression<Func<Phone, bool>> predicate)
+        public IQueryable<Contact> Where(Expression<Func<Contact, bool>> predicate)
         {
             return this.PhoneRepository.Where(predicate);
         }

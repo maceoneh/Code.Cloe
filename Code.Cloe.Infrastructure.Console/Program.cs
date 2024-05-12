@@ -18,19 +18,19 @@ Subject ReadSubject()
     Console.Write("Población: ");
     subject.Location = Console.ReadLine();
     //Se cargan los telefonos
-    subject.Phones = new List<Phone>();
+    subject.Contacts = new List<Contact>();
     var exit = false;
     do
     {
         Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
-            var phone = new Phone();
+            var phone = new Contact();
             Console.Write("Contacto: ");
             phone.NameContact = Console.ReadLine();
             Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
-            subject.Phones.Add(phone);
+            subject.Contacts.Add(phone);
         }
         else
         {
@@ -62,13 +62,13 @@ Subject? EditSubject(SubjectProxy entry)
     var exit = false;
     do
     {
-        if (subject.Phones == null)
+        if (subject.Contacts == null)
         {
-            subject.Phones = new List<Phone>();
+            subject.Contacts = new List<Contact>();
         }
         //-----
         Console.WriteLine("Vias de contacto: ");
-        foreach (var item in subject.Phones)
+        foreach (var item in subject.Contacts)
         {
             Console.WriteLine(item);
         }
@@ -76,12 +76,12 @@ Subject? EditSubject(SubjectProxy entry)
         Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
-            var phone = new Phone();
+            var phone = new Contact();
             Console.Write("Contacto: ");
             phone.NameContact = Console.ReadLine();
             Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
-            subject.Phones.Add(phone);
+            subject.Contacts.Add(phone);
         }
         //-----
         Console.Write("¿Desea modificar un teléfono de contacto?[S/N] ");
@@ -91,7 +91,7 @@ Subject? EditSubject(SubjectProxy entry)
             var row = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(row))
             {
-                var contact = subject.Phones[int.Parse(row) - 1];
+                var contact = subject.Contacts[int.Parse(row) - 1];
                 Console.Write("Nombre: ");
                 inputText = Console.ReadLine();
                 contact.NameContact = string.IsNullOrWhiteSpace(inputText)?contact.NameContact : inputText;

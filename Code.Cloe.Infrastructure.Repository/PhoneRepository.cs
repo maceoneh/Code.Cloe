@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Infrastructure.Repository
 {
-    public class PhoneRepository : IRepositoryBase<Phone, Guid>
+    public class PhoneRepository : IRepositoryBase<Contact, Guid>
     {
         private RepositoryContext db;
 
@@ -22,14 +22,14 @@ namespace Code.Cloe.Infrastructure.Repository
             this.db = db;
         }
 
-        public Phone Add(Phone item)
+        public Contact Add(Contact item)
         {
             item.ID = Guid.NewGuid();
             this.db.Phones.Add(item);
             return item;
         }
 
-        public async Task<Phone> AddAsync(Phone item)
+        public async Task<Contact> AddAsync(Contact item)
         {
             item.ID = Guid.NewGuid();
             await this.db.Phones.AddAsync(item);
@@ -64,7 +64,7 @@ namespace Code.Cloe.Infrastructure.Repository
             }
         }
 
-        public Phone? Edit(Phone item)
+        public Contact? Edit(Contact item)
         {
             var entry = this.db.Phones.FirstOrDefault(x => x.ID == item.ID);
             if (entry != null)
@@ -76,7 +76,7 @@ namespace Code.Cloe.Infrastructure.Repository
             return entry;
         }
 
-        public async Task<Phone?> EditAsync(Phone item)
+        public async Task<Contact?> EditAsync(Contact item)
         {
             var entry = await this.db.Phones.FirstOrDefaultAsync(x => x.ID == item.ID);
             if (entry != null)
@@ -88,27 +88,27 @@ namespace Code.Cloe.Infrastructure.Repository
             return entry;
         }
 
-        public Phone? Get(Guid id)
+        public Contact? Get(Guid id)
         {
             return this.db.Phones.FirstOrDefault(x => x.ID == id);
         }
 
-        public async Task<Phone?> GetAsync(Guid id)
+        public async Task<Contact?> GetAsync(Guid id)
         {
             return await this.db.Phones.FirstOrDefaultAsync(x => x.ID == id);
         }
 
-        public List<Phone> List()
+        public List<Contact> List()
         {
             return this.db.Phones.ToList(); 
         }
 
-        public async Task<List<Phone>> ListAsync()
+        public async Task<List<Contact>> ListAsync()
         {
             return await this.db.Phones.ToListAsync();
         }
 
-        public IQueryable<Phone> Where(Expression<Func<Phone, bool>> predicate)
+        public IQueryable<Contact> Where(Expression<Func<Contact, bool>> predicate)
         {
             return this.db.Phones.Where(predicate);
         }

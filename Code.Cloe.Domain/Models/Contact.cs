@@ -9,7 +9,7 @@ namespace Code.Cloe.Domain.Models
     /// <summary>
     /// Modelo para guardar un teléfono de un contacto
     /// </summary>
-    public class Phone
+    public class Contact
     {
         public Guid ID { get; set; }
 

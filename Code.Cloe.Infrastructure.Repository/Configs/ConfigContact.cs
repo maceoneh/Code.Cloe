@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Infrastructure.Repository.Configs
 {
-    internal class ConfigPhone : IEntityTypeConfiguration<Phone>
+    internal class ConfigContact : IEntityTypeConfiguration<Contact>
     {
-        public void Configure(EntityTypeBuilder<Phone> builder)
+        public void Configure(EntityTypeBuilder<Contact> builder)
         {
-            builder.ToTable("phones");
+            builder.ToTable("contacts");
             builder.HasKey(p => p.ID);
             builder.HasOne<Subject>()
-                .WithMany(p => p.Phones)
+                .WithMany(p => p.Contacts)
                 .HasForeignKey(s => s.SubjectID)
                 .OnDelete(DeleteBehavior.Cascade);
         }

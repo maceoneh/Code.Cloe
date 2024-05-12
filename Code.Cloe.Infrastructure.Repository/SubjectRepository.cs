@@ -72,7 +72,7 @@ namespace Code.Cloe.Infrastructure.Repository
                 to_modify.Province = item.Province;
                 to_modify.Location = item.Location;
                 to_modify.PostalCode = item.PostalCode;
-                to_modify.Phones = item.Phones;
+                to_modify.Contacts = item.Contacts;
                 this.db.Subjects.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
             return to_modify;
@@ -88,7 +88,7 @@ namespace Code.Cloe.Infrastructure.Repository
                 to_modify.Province = item.Province;
                 to_modify.Location = item.Location;
                 to_modify.PostalCode = item.PostalCode;
-                to_modify.Phones = item.Phones;
+                to_modify.Contacts = item.Contacts;
                 this.db.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
             return to_modify;
