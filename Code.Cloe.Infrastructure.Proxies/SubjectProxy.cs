@@ -86,7 +86,7 @@ namespace Code.Cloe.Infrastructure.Proxies
 
         public override string ToString()
         {
-            var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode;
+            var text = "Nombre: " + this.Name + " Dirección: " + this.Address + " Población: " + this.Location + " Provincia: " + this.Province + " CP: " + this.PostalCode + " ";
             if (this.Phones != null)
             {
                 foreach (var phone in this.Phones)
