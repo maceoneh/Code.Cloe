@@ -3,44 +3,113 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Code.Cloe.Infrastructure.UI.NewSubjectPage"
              Title="Nuevo cliente">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
-                <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eName"/>
-            </Grid>
-            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Dirección: " Style="{StaticResource LabelH1}"></Label>
-                <Editor Grid.Column="1" Placeholder="Escriba aquí su dirección..." x:Name="eAddress"/>
-            </Grid>
-            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="C.P.: " Style="{StaticResource LabelH1}"></Label>
-                <Editor Grid.Column="1" Placeholder="Escriba aquí su código postal..." x:Name="ePC"/>
-            </Grid>
-            <Grid HorizontalOptions="FillAndExpand" Padding="5, 5, 5, 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Población: " Style="{StaticResource LabelH1}"></Label>
-                <Editor Grid.Column="1" Placeholder="Escriba aquí su población..." x:Name="eLocation"/>
-            </Grid>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button x:Name="btCancel" Text="Cancelar" HorizontalOptions="Center" Style="{StaticResource buttonStyle}"></Button>
-                <Button x:Name="btSave" Text="Guardar" HorizontalOptions="Center"></Button>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+    <StackLayout>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <VerticalStackLayout Padding="5,5,5,5">
+                <!--Datos genéricos del cliente-->
+                <Label Text="Datos del cliente" Style="{StaticResource Headline}" HorizontalOptions="Center"></Label>
+                <Grid HorizontalOptions="FillAndExpand" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
+                    <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eName"/>
+                </Grid>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Dirección: " Style="{StaticResource LabelH1}"></Label>
+                    <Editor Grid.Column="1" Placeholder="Escriba aquí su dirección..." x:Name="eAddress"/>
+                </Grid>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="C.P.: " Style="{StaticResource LabelH1}"></Label>
+                    <Editor Grid.Column="1" Placeholder="Escriba aquí su código postal..." x:Name="ePC"/>
+                </Grid>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Población: " Style="{StaticResource LabelH1}"></Label>
+                    <Editor Grid.Column="1" Placeholder="Escriba aquí su población..." x:Name="eLocation"/>
+                </Grid>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Provincia: " Style="{StaticResource LabelH1}"></Label>
+                    <Editor Grid.Column="1" Placeholder="Escriba aquí su provincia..." x:Name="eProvince"/>
+                </Grid>
+                <!-- Datos de las formas de contacto -->
+                <Label Text="Contacto" Style="{StaticResource Headline}" HorizontalOptions="Center"></Label>
+                <VerticalStackLayout x:Name="vlContact1">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eContactName1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Teléfono: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su teléfono..." x:Name="eContactNumber1"/>
+                    </Grid>
+                </VerticalStackLayout>
+                <VerticalStackLayout IsVisible="false" x:Name="vlContact2">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eContactName2"/>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Teléfono: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su teléfono..." x:Name="eContactNumber2"/>
+                    </Grid>
+                </VerticalStackLayout>
+                <VerticalStackLayout IsVisible="false" x:Name="vlContact3">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Nombre: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su nombre..." x:Name="eContactName3"/>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Teléfono: " Style="{StaticResource LabelH1}"></Label>
+                        <Editor Grid.Column="1" Placeholder="Escriba aquí su teléfono..." x:Name="eContactNumber3"/>
+                    </Grid>
+                </VerticalStackLayout>
+                <Button Text="+" WidthRequest="5" HorizontalOptions="End"></Button>
+            </VerticalStackLayout>
+        </ScrollView>
+        <HorizontalStackLayout HorizontalOptions="Center" Padding="10,10,10,10">
+            <Button x:Name="btCancel" Text="Cancelar" HorizontalOptions="Center" WidthRequest="100"></Button>
+            <Button x:Name="btSave" Text="Guardar" HorizontalOptions="Center" WidthRequest="100"></Button>
+        </HorizontalStackLayout>
+    </StackLayout>
 </ContentPage>

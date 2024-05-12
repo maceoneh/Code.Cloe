@@ -126,7 +126,7 @@ int Menu()
     Console.WriteLine("MENU");
     Console.WriteLine("****************");
     Console.WriteLine("1. Crear sujeto");
-    Console.WriteLine("2. Modifica sujetos");
+    Console.WriteLine("2. Modifica sujeto");
     Console.WriteLine("3. Eliminar sujeto");
     Console.WriteLine("4. Lista sujetos");
     Console.WriteLine("");
