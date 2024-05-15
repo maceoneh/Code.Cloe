@@ -114,6 +114,10 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Editor" x:Key="EditorAttribute">
+        <Setter Property="VerticalOptions" Value="Center"></Setter>
+    </Style>
+
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -183,9 +187,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Label" x:Key="LabelH1">
+    <Style TargetType="Label" x:Key="LabelAttribute">
         <Setter Property="FontSize" Value="17" />
         <Setter Property="FontAttributes" Value="Bold"></Setter>
+        <Setter Property="VerticalOptions" Value="Center"></Setter>
     </Style>
 
     <Style TargetType="Span">
@@ -430,6 +435,10 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <Style TargetType="VerticalStackLayout">
+        <Setter Property="Padding" Value="5,5,5,5"></Setter>
     </Style>
 
 </ResourceDictionary>

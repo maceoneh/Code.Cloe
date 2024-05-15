@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Infrastructure.Repository
 {
-    internal class SubjectRepository : IRepositoryBase<Subject, Guid>
+    public class SubjectRepositoryOLD : IRepositoryBase<Subject, Guid>
     {
         private RepositoryContext db;
 
-        internal SubjectRepository(RepositoryContext db)
+        public SubjectRepositoryOLD(RepositoryContext db) 
         {
             this.db = db;
         }

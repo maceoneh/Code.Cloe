@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Infrastructure.Repository
 {
-    public class PhoneRepository : IRepositoryBase<Contact, Guid>
+    public class PhoneRepositoryOLD : IRepositoryBase<Contact, Guid>
     {
         private RepositoryContext db;
 
-        public PhoneRepository(RepositoryContext db)
+        public PhoneRepositoryOLD(RepositoryContext db)
         {
             this.db = db;
         }

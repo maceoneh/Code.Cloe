@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Code.Cloe.Application\Code.Cloe.Application.csproj" />
     <ProjectReference Include="..\Code.Cloe.Domain\Code.Cloe.Domain.csproj" />
   </ItemGroup>
 
