@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Infrastructure.Proxies.Interfaces
 {
-    public interface IModelProxy<TEntity>
+    public interface IDTOProxy<TDto>
     {
         /// <summary>
         /// Devuelve el modelo de origen
         /// </summary>
-        TEntity Model { get; }
+        TDto Model { get; }
 
         /// <summary>
         /// Carga toda la información adicional

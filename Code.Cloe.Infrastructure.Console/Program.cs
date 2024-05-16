@@ -5,6 +5,7 @@ using Code.Cloe.Application.Services.Subjects.DTO;
 using Code.Cloe.Domain.Models;
 using Code.Cloe.Infrastructure.Factories.Services;
 using Code.Cloe.Infrastructure.Proxies;
+using Code.Cloe.Infrastructure.Proxies.Services.Subjects;
 using Code.Cloe.Infrastructure.Repository;
 using Code.Cloe.Infrastructure.Repository.Contexts;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
@@ -45,7 +46,7 @@ SubjectDTO ReadSubject()
     return subject;
 }
 //-----
-SubjectOLD? EditSubject(SubjectProxy entry)
+SubjectDTO? EditSubject(SubjectDTOProxy entry)
 {
     Console.WriteLine("Se va a modificar el siguiente registro (INTRO mantiene la información):");
     Console.WriteLine(entry.ToString());
@@ -68,7 +69,7 @@ SubjectOLD? EditSubject(SubjectProxy entry)
     {
         if (subject.Contacts == null)
         {
-            subject.Contacts = new List<ContactOLD>();
+            subject.Contacts = new List<ContactDTO>();
         }
         //-----
         Console.WriteLine("Vias de contacto: ");
@@ -80,9 +81,9 @@ SubjectOLD? EditSubject(SubjectProxy entry)
         Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
-            var phone = new ContactOLD();
+            var phone = new ContactDTO();
             Console.Write("Contacto: ");
-            phone.NameContact = Console.ReadLine();
+            phone.Name = Console.ReadLine();
             Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
             subject.Contacts.Add(phone);
@@ -98,7 +99,7 @@ SubjectOLD? EditSubject(SubjectProxy entry)
                 var contact = subject.Contacts[int.Parse(row) - 1];
                 Console.Write("Nombre: ");
                 inputText = Console.ReadLine();
-                contact.NameContact = string.IsNullOrWhiteSpace(inputText)?contact.NameContact : inputText;
+                contact.Name = string.IsNullOrWhiteSpace(inputText)?contact.Name : inputText;
                 Console.Write("Teléfono: ");
                 inputText = Console.ReadLine();
                 contact.PhoneNumber = string.IsNullOrWhiteSpace(inputText) ? contact.PhoneNumber : inputText;
@@ -175,27 +176,27 @@ async Task EditSubjects()
         if (entry != null)
         {
             var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
-            subjectService.Edit(entry);
+            //subjectService.Edit(entry);
         }
     }
 }
 //-----
-async Task<List<SubjectProxy>> ListSubjects()
+async Task<List<SubjectDTOProxy>> ListSubjects()
 {
-    var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
+    var subjectService = new ListSubjectService(Code.Cloe.Infrastructure.Repository.Factory.Repository.Create<Subject>());
     //-----
-    var list = await ss.ListAsync();
-    var proxylist = new List<SubjectProxy>();
+    var list = await subjectService.ListAsync();
+    var proxylist = new List<SubjectDTOProxy>();
     foreach (var item in list)
     {
-        proxylist.Add(new SubjectProxy(item));
+        proxylist.Add(new SubjectDTOProxy(item));
     }
     //-----
     var rowCount = 0;
     foreach (var item in proxylist)
     {
         rowCount++;
-        Console.WriteLine(rowCount.ToString() + " - " + item);
+        Console.WriteLine(rowCount.ToString() + " - " + item.ToString());
     }
     //-----
     return proxylist;
@@ -210,7 +211,7 @@ async Task DeleteSubjects()
     { 
         var entry = list[int.Parse(row) - 1];
         var subjectService = Create.ServiceBase<SubjectOLD>();
-        await subjectService.DeleteAsync(entry.ID);
+        //await subjectService.DeleteAsync(entry.ID);
     }
 }
 //----- Se obtiene la ruta donde guardar los datos de la aplicación

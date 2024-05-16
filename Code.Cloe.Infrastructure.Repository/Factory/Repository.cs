@@ -20,6 +20,10 @@ namespace Code.Cloe.Infrastructure.Repository.Factory
             {
                 return (IRepositoryBase<TEntity, Guid>)new SubjectRepository(dbContext);
             }
+            if (entityType == typeof(Contact))
+            {
+                return (IRepositoryBase<TEntity, Guid>)new ContactRepository(dbContext);
+            }
             else
             {
                 throw new ArgumentException("TEntity not support");

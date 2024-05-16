@@ -11,5 +11,10 @@ namespace Code.Cloe.Application.Services.Subjects.DTO
         internal Guid ID;
         public string? Name { get; set; }
         public string? PhoneNumber { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name + " " + this.PhoneNumber;
+        }
     }
 }
