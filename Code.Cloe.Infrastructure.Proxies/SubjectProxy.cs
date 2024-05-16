@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Code.Cloe.Infrastructure.Proxies
 {
-    public class SubjectProxy : IModelProxy<Subject>
+    public class SubjectProxy : IModelProxy<SubjectOLD>
     {
-        public Subject Model { get; }
+        public SubjectOLD Model { get; }
 
-        public SubjectProxy(Subject model)
+        public SubjectProxy(SubjectOLD model)
         {
             this.Model = model;
         }
@@ -45,24 +45,24 @@ namespace Code.Cloe.Infrastructure.Proxies
         /// <summary>
         /// Listado de teléfonos asociados al sujeto
         /// </summary>
-        public Task<List<Contact>> ContactsAsync 
+        public Task<List<ContactOLD>> ContactsAsync 
         {
             get
             {
-                return Task.Factory.StartNew<List<Contact>>(() => 
+                return Task.Factory.StartNew<List<ContactOLD>>(() => 
                 {
                     this.LoadContacts();
-                    return this.Model.Contacts == null ? new List<Contact>() : this.Model.Contacts;
+                    return this.Model.Contacts == null ? new List<ContactOLD>() : this.Model.Contacts;
                 });                
             }
         }
 
-        public List<Contact> Contacts
+        public List<ContactOLD> Contacts
         {
             get
             {
                 this.LoadContacts();
-                return this.Model.Contacts == null ? new List<Contact>() : this.Model.Contacts;
+                return this.Model.Contacts == null ? new List<ContactOLD>() : this.Model.Contacts;
             }
         }
 
@@ -70,9 +70,9 @@ namespace Code.Cloe.Infrastructure.Proxies
         {
             if (this.Model.Contacts == null)
             {
-                this.Model.Contacts = new List<Contact>();
+                this.Model.Contacts = new List<ContactOLD>();
                 //-----
-                var phoneService = Create.ServiceBase<Contact>();
+                var phoneService = Create.ServiceBase<ContactOLD>();
                 var phones = phoneService.Where(p => p.SubjectID == this.ID);
                 foreach (var item in phones)
                 {
@@ -85,9 +85,9 @@ namespace Code.Cloe.Infrastructure.Proxies
         {
             if (this.Model.Contacts == null)
             {
-                this.Model.Contacts = new List<Contact>();
+                this.Model.Contacts = new List<ContactOLD>();
                 //-----
-                var phoneService = Create.ServiceBase<Contact>();
+                var phoneService = Create.ServiceBase<ContactOLD>();
                 var phones = await phoneService.Where(p => p.SubjectID == this.ID).ToListAsync();
                 foreach (var item in phones)
                 {

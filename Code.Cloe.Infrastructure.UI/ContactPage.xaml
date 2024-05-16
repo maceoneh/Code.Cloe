@@ -4,9 +4,9 @@
              xmlns:models="clr-namespace:Code.Cloe.Domain.Models;assembly=Code.Cloe.Domain"
              x:Class="Code.Cloe.Infrastructure.UI.ContactPage"
              Title="ContactPage">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <models:Contact x:Name="bContact"/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
         <VerticalStackLayout x:Name="vlContact1">
             <Grid HorizontalOptions="FillAndExpand">

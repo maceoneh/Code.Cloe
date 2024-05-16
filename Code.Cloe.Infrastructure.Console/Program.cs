@@ -1,15 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Code.Cloe.Application.Services;
+using Code.Cloe.Application.Services.Subjects;
+using Code.Cloe.Application.Services.Subjects.DTO;
 using Code.Cloe.Domain.Models;
 using Code.Cloe.Infrastructure.Factories.Services;
 using Code.Cloe.Infrastructure.Proxies;
 using Code.Cloe.Infrastructure.Repository;
 using Code.Cloe.Infrastructure.Repository.Contexts;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using System.Runtime.CompilerServices;
 
-Subject ReadSubject()
+SubjectDTO ReadSubject()
 {
-    var subject = new Subject();
+    var subject = new SubjectDTO();
     Console.Write("Nombre: ");
     subject.Name = Console.ReadLine();
     Console.Write("Dirección: ");
@@ -19,16 +22,16 @@ Subject ReadSubject()
     Console.Write("Población: ");
     subject.Location = Console.ReadLine();
     //Se cargan los telefonos
-    subject.Contacts = new List<Contact>();
+    subject.Contacts = new List<ContactDTO>();
     var exit = false;
     do
     {
         Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
-            var phone = new Contact();
+            var phone = new ContactDTO();
             Console.Write("Contacto: ");
-            phone.NameContact = Console.ReadLine();
+            phone.Name = Console.ReadLine();
             Console.Write("Numero: ");
             phone.PhoneNumber = Console.ReadLine();
             subject.Contacts.Add(phone);
@@ -42,7 +45,7 @@ Subject ReadSubject()
     return subject;
 }
 //-----
-Subject? EditSubject(SubjectProxy entry)
+SubjectOLD? EditSubject(SubjectProxy entry)
 {
     Console.WriteLine("Se va a modificar el siguiente registro (INTRO mantiene la información):");
     Console.WriteLine(entry.ToString());
@@ -65,7 +68,7 @@ Subject? EditSubject(SubjectProxy entry)
     {
         if (subject.Contacts == null)
         {
-            subject.Contacts = new List<Contact>();
+            subject.Contacts = new List<ContactOLD>();
         }
         //-----
         Console.WriteLine("Vias de contacto: ");
@@ -77,7 +80,7 @@ Subject? EditSubject(SubjectProxy entry)
         Console.Write("¿Desea agregar un teléfono de contacto?[S/N] ");
         if (Console.ReadLine() == "S")
         {
-            var phone = new Contact();
+            var phone = new ContactOLD();
             Console.Write("Contacto: ");
             phone.NameContact = Console.ReadLine();
             Console.Write("Numero: ");
@@ -156,9 +159,9 @@ int Menu()
 //-----
 async Task CreateSubject()
 {
-    var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
+    var subjectService = new CreateSubjectService(Code.Cloe.Infrastructure.Repository.Factory.Repository.Create<Subject>());
     //-----
-    var entry = await ss.AddAsync(ReadSubject());
+    var entry = await subjectService.AddAsync(ReadSubject());
 }
 //-----
 async Task EditSubjects()
@@ -171,7 +174,7 @@ async Task EditSubjects()
         var entry = EditSubject(list[int.Parse(fila) - 1]);
         if (entry != null)
         {
-            var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
+            var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
             subjectService.Edit(entry);
         }
     }
@@ -179,7 +182,7 @@ async Task EditSubjects()
 //-----
 async Task<List<SubjectProxy>> ListSubjects()
 {
-    var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
+    var ss = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
     //-----
     var list = await ss.ListAsync();
     var proxylist = new List<SubjectProxy>();
@@ -206,7 +209,7 @@ async Task DeleteSubjects()
     if (!string.IsNullOrWhiteSpace(row))
     { 
         var entry = list[int.Parse(row) - 1];
-        var subjectService = Create.ServiceBase<Subject>();
+        var subjectService = Create.ServiceBase<SubjectOLD>();
         await subjectService.DeleteAsync(entry.ID);
     }
 }
@@ -219,10 +222,10 @@ if (!Directory.Exists(localDataFolder))
     Directory.CreateDirectory(localDataFolder);
 }
 //----- Se guarda la ruta por si las clases Factory las necesitan para instanciar
-Code.Cloe.Infrastructure.Factories.Services.Create.RepositoryFolder = localDataFolder;
+Code.Cloe.Infrastructure.Repository.Factory.Context.RepositoryFolder = localDataFolder;
 //-----
-var sc = new RepositoryContext(localDataFolder);
-sc.Migrate();
+var sc = Code.Cloe.Infrastructure.Repository.Factory.Context.GetMigrate();
+await sc.MigrateAsync();
 //-----
 var opt = -1;
 do

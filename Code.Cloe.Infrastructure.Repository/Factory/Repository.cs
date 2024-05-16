@@ -12,18 +12,9 @@ namespace Code.Cloe.Infrastructure.Repository.Factory
 {
     static public class Repository
     {
-        static public string? RepositoryFolder { get; set; }
         static public IRepositoryBase<TEntity, Guid> Create<TEntity>()
         {
-            RepositoryContext dbContext;
-            if (string.IsNullOrEmpty(RepositoryFolder))
-            {
-                dbContext = new RepositoryContext();
-            }
-            else
-            { 
-                dbContext = new RepositoryContext(RepositoryFolder);
-            }
+            RepositoryContext dbContext = (RepositoryContext)Factory.Context.GetMigrate();            
             var entityType = typeof(TEntity);
             if (entityType == typeof(Subject))
             {

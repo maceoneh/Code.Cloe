@@ -6,32 +6,15 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Domain.Models
 {
-    /// <summary>
-    /// Modelo para guardar un teléfono de un contacto
-    /// </summary>
-    public class Contact
+    public record Contact(string? Name, string? PhoneNumber, string? eMail)
     {
-        public Guid ID { get; set; }
+        public Guid ID { get; set; } 
+        public Guid IDSubject { get; set; }
 
-        /// <summary>
-        /// ID del sujeto al que pertenece
-        /// </summary>
-        public Guid SubjectID { get; set; }
-
-        /// <summary>
-        /// Número de telefono
-        /// </summary>
-        public string? PhoneNumber { get; set; }
-
-        /// <summary>
-        /// Nombre del contacto asociado al telefono
-        /// </summary>
-        public string? NameContact { get; set; }
-
-        public override string ToString()
-        {
-            var txt = "Nombre contacto: " + this.NameContact + " Teléfono: " + this.PhoneNumber;
-            return txt;
+        public Contact(Guid ID, Guid IDSubject, string? Name, string? PhoneNumber, string? eMail) : this(Name, PhoneNumber, eMail)
+        { 
+            this.ID = ID;
+            this.IDSubject = IDSubject;
         }
     }
 }

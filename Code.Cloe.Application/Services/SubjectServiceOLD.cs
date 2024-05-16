@@ -5,16 +5,16 @@ using System.Linq.Expressions;
 
 namespace Code.Cloe.Application.Services
 {
-    public class SubjectService : IServiceBase<Subject, Guid>
+    public class SubjectServiceOLD : IServiceBase<SubjectOLD, Guid>
     {
-        private readonly IRepositoryBase<Subject, Guid> SubjectRepository;        
+        private readonly IRepositoryBase<SubjectOLD, Guid> SubjectRepository;        
 
-        public SubjectService(IRepositoryBase<Subject, Guid> subjectRepository)
+        public SubjectServiceOLD(IRepositoryBase<SubjectOLD, Guid> subjectRepository)
         { 
             this.SubjectRepository = subjectRepository;
         }
 
-        public Subject Add(Subject item)
+        public SubjectOLD Add(SubjectOLD item)
         {
             if (item == null)
             {
@@ -28,7 +28,7 @@ namespace Code.Cloe.Application.Services
             return result;
         }
 
-        public async Task<Subject> AddAsync(Subject item)
+        public async Task<SubjectOLD> AddAsync(SubjectOLD item)
         {
             if (item == null)
             {
@@ -54,7 +54,7 @@ namespace Code.Cloe.Application.Services
             await this.SubjectRepository.CommitAsync();
         }
 
-        public Subject? Edit(Subject item)
+        public SubjectOLD? Edit(SubjectOLD item)
         {
             if (item == null)
             {
@@ -67,7 +67,7 @@ namespace Code.Cloe.Application.Services
             return result;
         }
 
-        public async Task<Subject?> EditAsync(Subject item)
+        public async Task<SubjectOLD?> EditAsync(SubjectOLD item)
         {
             if (item == null)
             {
@@ -80,31 +80,31 @@ namespace Code.Cloe.Application.Services
             return result;
         }
 
-        public Subject? Get(Guid id)
+        public SubjectOLD? Get(Guid id)
         {
             var result = this.SubjectRepository.Get(id);
             //-----
             return result;
         }
 
-        public async Task<Subject?> GetAsync(Guid id)
+        public async Task<SubjectOLD?> GetAsync(Guid id)
         {
             var result = await this.SubjectRepository.GetAsync(id);
             //-----
             return result;
         }
 
-        public List<Subject> List()
+        public List<SubjectOLD> List()
         {
             return this.SubjectRepository.List();
         }
 
-        public async Task<List<Subject>> ListAsync()
+        public async Task<List<SubjectOLD>> ListAsync()
         {
             return await this.SubjectRepository.ListAsync();
         }
 
-        public IQueryable<Subject> Where(Expression<Func<Subject, bool>> predicate)
+        public IQueryable<SubjectOLD> Where(Expression<Func<SubjectOLD, bool>> predicate)
         {
             return this.SubjectRepository.Where(predicate);
         }

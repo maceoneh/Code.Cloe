@@ -1,14 +1,15 @@
-﻿using Code.Cloe.Domain.Models;
+﻿using Code.Cloe.Domain.Interfaces.Repository;
+using Code.Cloe.Domain.Models;
 using Code.Cloe.Infrastructure.Repository.Configs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Code.Cloe.Infrastructure.Repository.Contexts
 {
-    public class RepositoryContext : DbContext
+    internal class RepositoryContext : DbContext, IMigrate
     {
-        internal string Folder { get; private set; }
+        internal string Folder { get; private set; }        
         internal DbSet<Subject> Subjects { get; set; }
-        internal DbSet<Contact> Phones { get; set; }
+        internal DbSet<Contact> Contacts { get; set; }
 
         public RepositoryContext()
         {
@@ -45,7 +46,7 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
             this.Database.Migrate();
         }
 
-        public async void MigrateAsync()
+        public async Task MigrateAsync()
         {
             await this.Database.MigrateAsync();
         }

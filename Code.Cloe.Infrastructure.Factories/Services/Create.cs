@@ -16,27 +16,18 @@ namespace Code.Cloe.Infrastructure.Factories.Services
     {
         static public string? RepositoryFolder { get; set; }
         static public IServiceBase<TEntity, Guid> ServiceBase<TEntity>() where TEntity : class
-        {
-            RepositoryContext repository;
-            if (RepositoryFolder == null)
-            {
-                repository = new RepositoryContext();
-            }
-            else
-            {
-                repository = new RepositoryContext(RepositoryFolder);
-            }
-            var entityType = typeof(TEntity);
-            if (entityType == typeof(Subject))
-            {
-                var subjectRepository = new SubjectRepositoryOLD(repository);
-                return (IServiceBase<TEntity, Guid>)new SubjectService(subjectRepository);
-            }
-            else if (entityType == typeof(Contact))
-            {
-                var subjectRepository = new PhoneRepositoryOLD(repository);
-                return (IServiceBase<TEntity, Guid>)new ContactService(subjectRepository);
-            }
+        {   
+            //var entityType = typeof(TEntity);
+            //if (entityType == typeof(SubjectOLD))
+            //{
+            //    var subjectRepository = new SubjectRepository(repository);
+            //    return (IServiceBase<TEntity, Guid>)new SubjectService(subjectRepository);
+            //}
+            //else if (entityType == typeof(ContactOLD))
+            //{
+            //    var subjectRepository = new PhoneRepositoryOLD(repository);
+            //    return (IServiceBase<TEntity, Guid>)new ContactServiceOLD(subjectRepository);
+            //}
             throw new ArgumentException();
         }
     }

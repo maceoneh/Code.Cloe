@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Code.Cloe.Infrastructure.Repository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240512172954_Migration000002")]
-    partial class Migration000002
+    [Migration("20240516103941_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,18 +26,21 @@ namespace Code.Cloe.Infrastructure.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("NameContact")
+                    b.Property<Guid>("IDSubject")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("SubjectID")
+                    b.Property<string>("eMail")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SubjectID");
+                    b.HasIndex("IDSubject");
 
                     b.ToTable("contacts", (string)null);
                 });
@@ -58,7 +61,6 @@ namespace Code.Cloe.Infrastructure.Repository.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PostalCode")
-                        .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Province")
@@ -73,7 +75,7 @@ namespace Code.Cloe.Infrastructure.Repository.Migrations
                 {
                     b.HasOne("Code.Cloe.Domain.Models.Subject", null)
                         .WithMany("Contacts")
-                        .HasForeignKey("SubjectID")
+                        .HasForeignKey("IDSubject")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

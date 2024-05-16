@@ -14,10 +14,10 @@ namespace Code.Cloe.Infrastructure.Repository.Configs
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.ToTable("contacts");
-            builder.HasKey(p => p.ID);
+            builder.HasKey(c => c.ID);
             builder.HasOne<Subject>()
-                .WithMany(p => p.Contacts)
-                .HasForeignKey(s => s.SubjectID)
+                .WithMany(s => s.Contacts)
+                .HasForeignKey(c => c.IDSubject)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

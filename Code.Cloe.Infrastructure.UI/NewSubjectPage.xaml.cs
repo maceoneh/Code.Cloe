@@ -1,11 +1,11 @@
 using Code.Cloe.Domain.Models;
-using Contact = Code.Cloe.Domain.Models.Contact;
+using ContactOLD = Code.Cloe.Domain.Models.ContactOLD;
 
 namespace Code.Cloe.Infrastructure.UI;
 
 public partial class NewSubjectPage : ContentPage
 {
-    private Subject Subject { get; set; } = new Subject() { Contacts = new List<Contact>() };
+    private SubjectOLD Subject { get; set; } = new SubjectOLD() { Contacts = new List<ContactOLD>() };
     
 	public NewSubjectPage()
 	{
@@ -41,7 +41,7 @@ public partial class NewSubjectPage : ContentPage
             await this.DisplayAlert("ERROR", ex.Message, "Salir");
         }
         //-----
-        var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<Subject>();
+        var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
         //-----
         this.Subject.Name = this.eName.Text;
         this.Subject.Address = this.eAddress.Text;

@@ -5,7 +5,7 @@ namespace Code.Cloe.Infrastructure.UI;
 
 public partial class SubjectPage : ContentPage
 {
-    private ObservableCollection<Subject> Subjects = new ObservableCollection<Subject>();
+    private ObservableCollection<SubjectOLD> Subjects = new ObservableCollection<SubjectOLD>();
 
     public SubjectPage()
 	{
@@ -22,7 +22,7 @@ public partial class SubjectPage : ContentPage
 			MainThread.BeginInvokeOnMainThread(() => {
                 this.Subjects.Clear();
             });
-			var subject_service = Factories.Services.Create.ServiceBase<Subject>();
+			var subject_service = Factories.Services.Create.ServiceBase<SubjectOLD>();
 			foreach (var item in await subject_service.ListAsync())
 			{
 				MainThread.BeginInvokeOnMainThread(() => {
