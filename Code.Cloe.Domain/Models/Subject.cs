@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Domain.Models
 {
-    public record Subject : ISoftDelete
+    public record Subject : ISoftDelete, ICreateData, IModifyData
     {
         public Guid ID { get; set; }
         public string? Name { get; set; }
@@ -18,6 +18,8 @@ namespace Code.Cloe.Domain.Models
         public List<Contact>? Contacts { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DeleteDateTime { get; set; }
+        public DateTime CreateDateTime { get; set; }
+        public DateTime ModifyDateTime { get; set; }
 
         public Subject(Guid ID, string? Name, string? Address, string? PostalCode, string? Location, string? Province) 
         { 

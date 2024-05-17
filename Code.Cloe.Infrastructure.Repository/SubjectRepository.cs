@@ -23,6 +23,7 @@ namespace Code.Cloe.Infrastructure.Repository
         public Subject Add(Subject item)
         {
             item.ID = Guid.NewGuid();
+            item.CreateDateTime = DateTime.Now;
             this.db.Subjects.Add(item);
             return item;
         }
@@ -30,6 +31,7 @@ namespace Code.Cloe.Infrastructure.Repository
         public async Task<Subject> AddAsync(Subject item)
         {
             item.ID = Guid.NewGuid();
+            item.CreateDateTime = DateTime.Now;
             await this.db.Subjects.AddAsync(item);
             return item;
         }
@@ -78,34 +80,36 @@ namespace Code.Cloe.Infrastructure.Repository
 
         public Subject? Edit(Subject item)
         {
-            var to_modify = this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefault();
-            if (to_modify != null)
+            var toModify = this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefault();
+            if (toModify != null)
             {
-                to_modify.Name = item.Name;
-                to_modify.Address = item.Address;
-                to_modify.PostalCode = item.PostalCode;
-                to_modify.Location = item.Location;
-                to_modify.Province = item.Province;    
-                to_modify.Contacts = item.Contacts;
-                this.db.Subjects.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                toModify.Name = item.Name;
+                toModify.Address = item.Address;
+                toModify.PostalCode = item.PostalCode;
+                toModify.Location = item.Location;
+                toModify.Province = item.Province;    
+                toModify.Contacts = item.Contacts;
+                toModify.ModifyDateTime = DateTime.Now;
+                this.db.Subjects.Entry(toModify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return to_modify;
+            return toModify;
         }
 
         public async Task<Subject?> EditAsync(Subject item)
         {
-            var to_modify = await this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefaultAsync();
-            if (to_modify != null)
+            var toModify = await this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefaultAsync();
+            if (toModify != null)
             {
-                to_modify.Name = item.Name;
-                to_modify.Address = item.Address;
-                to_modify.PostalCode = item.PostalCode;
-                to_modify.Location = item.Location;
-                to_modify.Province = item.Province;
-                to_modify.Contacts = item.Contacts;
-                this.db.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                toModify.Name = item.Name;
+                toModify.Address = item.Address;
+                toModify.PostalCode = item.PostalCode;
+                toModify.Location = item.Location;
+                toModify.Province = item.Province;
+                toModify.Contacts = item.Contacts;
+                toModify.ModifyDateTime = DateTime.Now;
+                this.db.Entry(toModify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return to_modify;
+            return toModify;
         }
 
         public Subject? Get(Guid id)
