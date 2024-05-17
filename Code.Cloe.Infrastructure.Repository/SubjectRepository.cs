@@ -69,7 +69,7 @@ namespace Code.Cloe.Infrastructure.Repository
             {
                 this.db.Subjects.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return to_modify;
+            return item;
         }
 
         public async Task<Subject?> EditAsync(Subject item)
@@ -79,7 +79,7 @@ namespace Code.Cloe.Infrastructure.Repository
             {
                 this.db.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return to_modify;
+            return item;
         }
 
         public Subject? Get(Guid id)

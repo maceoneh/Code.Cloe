@@ -129,6 +129,7 @@ int Menu()
     Console.WriteLine("****************");
     Console.WriteLine("MENU");
     Console.WriteLine("****************");
+    Console.WriteLine("");
     Console.WriteLine("1. Crear sujeto");
     Console.WriteLine("2. Modifica sujeto");
     Console.WriteLine("3. Eliminar sujeto");
@@ -175,8 +176,8 @@ async Task EditSubjects()
         var entry = EditSubject(list[int.Parse(fila) - 1]);
         if (entry != null)
         {
-            var subjectService = Code.Cloe.Infrastructure.Factories.Services.Create.ServiceBase<SubjectOLD>();
-            //subjectService.Edit(entry);
+            var subjectService = new EditSubjectService(Code.Cloe.Infrastructure.Repository.Factory.Repository.Create<Subject>());
+            await subjectService.EditAsync(entry);
         }
     }
 }
