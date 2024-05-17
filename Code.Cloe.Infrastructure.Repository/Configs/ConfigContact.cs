@@ -19,6 +19,7 @@ namespace Code.Cloe.Infrastructure.Repository.Configs
                 .WithMany(s => s.Contacts)
                 .HasForeignKey(c => c.IDSubject)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.HasQueryFilter(c => !c.IsDeleted);
         }
     }
 }

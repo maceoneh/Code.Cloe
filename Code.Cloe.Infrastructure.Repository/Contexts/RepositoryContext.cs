@@ -26,6 +26,7 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
             {
                 throw new ArgumentException(folder + " not exists");
             }
+            //this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

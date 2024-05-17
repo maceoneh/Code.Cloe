@@ -15,6 +15,7 @@ namespace Code.Cloe.Infrastructure.Repository.Configs
         {
             builder.ToTable("subjects");
             builder.HasKey(s => s.ID);
+            builder.HasQueryFilter(s => !s.IsDeleted);
         }
     }
 }

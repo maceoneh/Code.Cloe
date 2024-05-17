@@ -1,15 +1,15 @@
+using Code.Cloe.Application.Services.Subjects.DTO;
 using Code.Cloe.Domain.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Collections.ObjectModel;
-using ContactOLD = Code.Cloe.Domain.Models.ContactOLD;
 
 namespace Code.Cloe.Infrastructure.UI;
 
 public partial class ContactPage : ContentPage
 {
-	private ObservableCollection<ContactOLD> Contacts = new ObservableCollection<ContactOLD>();
-	private SubjectOLD Subject { get; }
-	public ContactPage(SubjectOLD subject)
+	private ObservableCollection<ContactDTO> Contacts = new ObservableCollection<ContactDTO>();
+	private SubjectDTO Subject { get; }
+	public ContactPage(SubjectDTO subject)
 	{
 		InitializeComponent();
         this.btAddContact.Clicked += BtAddContact_Clicked;
@@ -34,7 +34,7 @@ public partial class ContactPage : ContentPage
 		this.Contacts.Clear();
         if (this.Subject.Contacts == null)
         {
-            this.Subject.Contacts = new List<ContactOLD>();
+            this.Subject.Contacts = new List<ContactDTO>();
         }
         foreach (var item in this.Subject.Contacts)
 		{ 

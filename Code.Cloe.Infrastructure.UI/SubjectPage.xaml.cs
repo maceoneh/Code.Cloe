@@ -1,3 +1,4 @@
+using Code.Cloe.Application.Services.Subjects.DTO;
 using Code.Cloe.Domain.Models;
 using System.Collections.ObjectModel;
 
@@ -5,7 +6,7 @@ namespace Code.Cloe.Infrastructure.UI;
 
 public partial class SubjectPage : ContentPage
 {
-    private ObservableCollection<SubjectOLD> Subjects = new ObservableCollection<SubjectOLD>();
+    private ObservableCollection<SubjectDTO> Subjects = new ObservableCollection<SubjectDTO>();
 
     public SubjectPage()
 	{
@@ -22,7 +23,7 @@ public partial class SubjectPage : ContentPage
 			MainThread.BeginInvokeOnMainThread(() => {
                 this.Subjects.Clear();
             });
-			var subject_service = Factories.Services.Create.ServiceBase<SubjectOLD>();
+			var subject_service = Factories.Services.Create.ServiceBase<SubjectDTO>();
 			foreach (var item in await subject_service.ListAsync())
 			{
 				MainThread.BeginInvokeOnMainThread(() => {

@@ -46,19 +46,33 @@ namespace Code.Cloe.Infrastructure.Repository
 
         public void Delete(Guid id)
         {
-            var to_delete = this.db.Subjects.Where(e => e.ID == id).FirstOrDefault();
-            if (to_delete != null)
+            //var to_delete = this.db.Subjects.Where(e => e.ID == id).FirstOrDefault();
+            //if (to_delete != null)
+            //{
+            //    this.db.Subjects.Remove(to_delete);
+            //}
+            var toDelete = this.db.Subjects.Where(e => e.ID == id).FirstOrDefault();
+            if (toDelete != null)
             {
-                this.db.Subjects.Remove(to_delete);
+                toDelete.IsDeleted = true;
+                toDelete.DeleteDateTime = DateTime.Now;
+                this.db.Subjects.Entry(toDelete).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            var to_delete = await this.db.Subjects.Where(e => e.ID == id).FirstOrDefaultAsync();
-            if (to_delete != null)
+            //var to_delete = await this.db.Subjects.Where(e => e.ID == id).FirstOrDefaultAsync();
+            //if (to_delete != null)
+            //{
+            //    this.db.Subjects.Remove(to_delete);
+            //}
+            var toDelete = this.db.Subjects.Where(e => e.ID == id).FirstOrDefault();
+            if (toDelete != null)
             {
-                this.db.Subjects.Remove(to_delete);
+                toDelete.IsDeleted = true;
+                toDelete.DeleteDateTime = DateTime.Now;
+                this.db.Subjects.Entry(toDelete).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
         }
 
@@ -71,7 +85,7 @@ namespace Code.Cloe.Infrastructure.Repository
                 to_modify.Address = item.Address;
                 to_modify.PostalCode = item.PostalCode;
                 to_modify.Location = item.Location;
-                to_modify.Province = item.Province;
+                to_modify.Province = item.Province;    
                 to_modify.Contacts = item.Contacts;
                 this.db.Subjects.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
