@@ -6,15 +6,25 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Domain.Models
 {
-    public record Subject(string? Name, string? Address, string? PostalCode, string? Location, string? Province)
+    public record Subject
     {
         public Guid ID { get; set; }
-        public List<Contact>? Contacts { get; init; }
+        public string? Name { get; set; }
+        public string? Address { get; set; }
+        public string? PostalCode { get; set; }
+        public string? Location { get; set; }
+        public string? Province { get; set; }
+        public List<Contact>? Contacts { get; set; }
 
-        public Subject(Guid ID, string? Name, string? Address, string? PostalCode, string? Location, string? Province) :
-            this(Name, Address, PostalCode, Location, Province)
+        public Subject(Guid ID, string? Name, string? Address, string? PostalCode, string? Location, string? Province) 
         { 
             this.ID = ID;
+            this.Name = Name;
+            this.Address = Address;                
+            this.PostalCode = PostalCode;
+            this.Location = Location;
+            this.Province = Province;
+            this.Contacts = new List<Contact>();
         }
     }
 }

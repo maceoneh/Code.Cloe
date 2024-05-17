@@ -55,8 +55,7 @@ namespace Code.Cloe.Application.Services.Subjects
 
         public async Task<SubjectDTO?> EditAsync(SubjectDTO item)
         {
-            //----- Se vuelca el DTO en los modelos
-            var model = new Subject(item.ID, item.Name, item.Address, item.PostalCode, item.Location, item.Province);
+            //----- Se vuelca el DTO en los modelos            
             var contactModels = new List<Contact>(item.Contacts == null ? 0 : item.Contacts.Count);
             if (item.Contacts != null)
             {
@@ -65,6 +64,7 @@ namespace Code.Cloe.Application.Services.Subjects
                     contactModels.Add(new Contact(contact.ID, item.ID, contact.Name, contact.PhoneNumber, null));
                 }
             }
+            var model = new Subject(item.ID, item.Name, item.Address, item.PostalCode, item.Location, item.Province) { Contacts = contactModels };
             //-----
             model = await this.RepositorySubject.EditAsync(model);
             if (model != null)

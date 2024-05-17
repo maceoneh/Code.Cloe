@@ -14,8 +14,6 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
     {
         public SubjectDTO DTO { get; }
 
-        private List<ContactDTO>? _Contacts = null;
-
         public string? Name => this.DTO.Name;
 
         /// <summary>
@@ -48,9 +46,11 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
             get
             {
                 this.LoadData();
-                return this._Contacts;
+                return this.DTO.Contacts;
             }
         }
+
+        public bool DataLoaded { get; private set; } = false;
 
         public SubjectDTOProxy(SubjectDTO model) 
         {  
@@ -59,16 +59,20 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
 
         public void Initialize()
         {
-            this._Contacts = null;
+            this.DTO.Contacts = null;
+            //-----
+            this.DataLoaded = false;
         }
 
         public void LoadData()
         {
-            if (this._Contacts == null)
+            if (this.DTO.Contacts == null)
             {
                 var serviceContact = new ListContactService(Repository.Factory.Repository.Create<Contact>());
-                this._Contacts = serviceContact.ListBySubjectDTO(this.DTO);
+                this.DTO.Contacts = serviceContact.ListBySubjectDTO(this.DTO);
             }
+            //-----
+            this.DataLoaded = true;
         }
 
         public Task LoadDataAsync()

@@ -67,9 +67,15 @@ namespace Code.Cloe.Infrastructure.Repository
             var to_modify = this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefault();
             if (to_modify != null)
             {
-                this.db.Subjects.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                to_modify.Name = item.Name;
+                to_modify.Address = item.Address;
+                to_modify.PostalCode = item.PostalCode;
+                to_modify.Location = item.Location;
+                to_modify.Province = item.Province;
+                to_modify.Contacts = item.Contacts;
+                this.db.Subjects.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return item;
+            return to_modify;
         }
 
         public async Task<Subject?> EditAsync(Subject item)
@@ -77,9 +83,15 @@ namespace Code.Cloe.Infrastructure.Repository
             var to_modify = await this.db.Subjects.Where(e => e.ID == item.ID).FirstOrDefaultAsync();
             if (to_modify != null)
             {
-                this.db.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                to_modify.Name = item.Name;
+                to_modify.Address = item.Address;
+                to_modify.PostalCode = item.PostalCode;
+                to_modify.Location = item.Location;
+                to_modify.Province = item.Province;
+                to_modify.Contacts = item.Contacts;
+                this.db.Entry(to_modify).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             }
-            return item;
+            return to_modify;
         }
 
         public Subject? Get(Guid id)

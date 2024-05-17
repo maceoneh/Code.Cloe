@@ -14,6 +14,11 @@ namespace Code.Cloe.Infrastructure.Proxies.Interfaces
         TDto DTO { get; }
 
         /// <summary>
+        /// Indica si la información adicional se ha cargado
+        /// </summary>
+        bool DataLoaded { get; }
+
+        /// <summary>
         /// Carga toda la información adicional
         /// </summary>
         void LoadData();
