@@ -50,7 +50,7 @@ SubjectDTO? EditSubject(SubjectDTOProxy entry)
 {
     Console.WriteLine("Se va a modificar el siguiente registro (INTRO mantiene la información):");
     Console.WriteLine(entry.ToString());
-    var subject = entry.Model;
+    var subject = entry.DTO;
     Console.Write("Nombre: ");
     var inputText = Console.ReadLine();
     subject.Name = string.IsNullOrWhiteSpace(inputText) ? subject.Name : inputText;
@@ -210,8 +210,8 @@ async Task DeleteSubjects()
     if (!string.IsNullOrWhiteSpace(row))
     { 
         var entry = list[int.Parse(row) - 1];
-        var subjectService = Create.ServiceBase<SubjectOLD>();
-        //await subjectService.DeleteAsync(entry.ID);
+        var subjectService = new DeleteSubjectService(Code.Cloe.Infrastructure.Repository.Factory.Repository.Create<Subject>());
+        await subjectService.DeleteAsync(entry.DTO);
     }
 }
 //----- Se obtiene la ruta donde guardar los datos de la aplicación

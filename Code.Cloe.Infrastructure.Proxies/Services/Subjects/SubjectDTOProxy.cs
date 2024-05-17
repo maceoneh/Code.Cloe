@@ -12,31 +12,31 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
 {
     public class SubjectDTOProxy : IDTOProxy<SubjectDTO>
     {
-        public SubjectDTO Model { get; }
+        public SubjectDTO DTO { get; }
 
         private List<ContactDTO>? _Contacts = null;
 
-        public string? Name => this.Model.Name;
+        public string? Name => this.DTO.Name;
 
         /// <summary>
         /// Dirección
         /// </summary>
-        public string? Address => this.Model.Address;
+        public string? Address => this.DTO.Address;
 
         /// <summary>
         /// Código postal
         /// </summary>        
-        public string? PostalCode => this.Model.PostalCode;
+        public string? PostalCode => this.DTO.PostalCode;
 
         /// <summary>
         /// Población
         /// </summary>
-        public string? Location => this.Model.Location;
+        public string? Location => this.DTO.Location;
 
         /// <summary>
         /// Provincia
         /// </summary>
-        public string? Province => this.Model.Province;
+        public string? Province => this.DTO.Province;
 
         
 
@@ -54,7 +54,7 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
 
         public SubjectDTOProxy(SubjectDTO model) 
         {  
-            this.Model = model; 
+            this.DTO = model; 
         }
 
         public void Initialize()
@@ -67,7 +67,7 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
             if (this._Contacts == null)
             {
                 var serviceContact = new ListContactService(Repository.Factory.Repository.Create<Contact>());
-                this._Contacts = serviceContact.ListBySubjectDTO(this.Model);
+                this._Contacts = serviceContact.ListBySubjectDTO(this.DTO);
             }
         }
 
@@ -78,7 +78,7 @@ namespace Code.Cloe.Infrastructure.Proxies.Services.Subjects
 
         public override string ToString()
         {
-            var txt = this.Model.ToString() + Environment.NewLine;
+            var txt = this.DTO.ToString() + Environment.NewLine;
             if (this.Contacts != null)
             {
                 txt += "Contacto:";

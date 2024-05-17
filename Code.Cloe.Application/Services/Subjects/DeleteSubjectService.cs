@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Code.Cloe.Application.Services.Subjects
 {
-    internal class DeleteSubjectService : IServiceDelete<SubjectDTO>
+    public class DeleteSubjectService : IServiceDelete<SubjectDTO>
     {
         private readonly IRepositoryBase<Subject, Guid> SubjectRepository;
 
@@ -19,14 +19,16 @@ namespace Code.Cloe.Application.Services.Subjects
             SubjectRepository = subjectRepository;
         }
 
-        public void Delete(SubjectDTO id)
+        public void Delete(SubjectDTO dto)
         {
-            throw new NotImplementedException();
+            this.SubjectRepository.Delete(dto.ID);
+            this.SubjectRepository.Commit();
         }
 
-        public Task DeleteAsync(SubjectDTO id)
+        public async Task DeleteAsync(SubjectDTO dto)
         {
-            throw new NotImplementedException();
+            await this.SubjectRepository.DeleteAsync(dto.ID);
+            await this.SubjectRepository.CommitAsync();
         }
     }
 }

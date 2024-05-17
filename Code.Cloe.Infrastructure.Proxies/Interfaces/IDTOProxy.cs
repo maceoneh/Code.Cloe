@@ -11,7 +11,7 @@ namespace Code.Cloe.Infrastructure.Proxies.Interfaces
         /// <summary>
         /// Devuelve el modelo de origen
         /// </summary>
-        TDto Model { get; }
+        TDto DTO { get; }
 
         /// <summary>
         /// Carga toda la información adicional
