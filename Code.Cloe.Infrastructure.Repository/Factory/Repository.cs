@@ -20,9 +20,13 @@ namespace Code.Cloe.Infrastructure.Repository.Factory
             {
                 return (IRepositoryBase<TEntity, Guid>)new SubjectRepository(dbContext);
             }
-            if (entityType == typeof(Contact))
+            else if (entityType == typeof(Contact))
             {
                 return (IRepositoryBase<TEntity, Guid>)new ContactRepository(dbContext);
+            }
+            else if (entityType == typeof(Counter))
+            {
+                return (IRepositoryBase<TEntity, Guid>)new CounterRepository(dbContext);
             }
             else
             {

@@ -10,6 +10,9 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
         internal string Folder { get; private set; }        
         internal DbSet<Subject> Subjects { get; set; }
         internal DbSet<Contact> Contacts { get; set; }
+        internal DbSet<Counter> Counters { get; set; }
+        internal DbSet<MasterDetail> MasterDetails { get; set; }
+        internal DbSet<Detail> Details { get; set; }
 
         public RepositoryContext()
         {
@@ -40,6 +43,9 @@ namespace Code.Cloe.Infrastructure.Repository.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ConfigSubject());
             modelBuilder.ApplyConfiguration(new ConfigContact());
+            modelBuilder.ApplyConfiguration(new ConfigCounter());
+            modelBuilder.ApplyConfiguration(new ConfigMasterDetail());
+            modelBuilder.ApplyConfiguration(new ConfigDetail());
         }
 
         public void Migrate()

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Code.Cloe.Domain\Code.Cloe.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\MasterDetail\" />
+  </ItemGroup>
+
 </Project>
